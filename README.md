@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Text Compression Tool
+
+A Next.js application that provides a simple interface for compressing text using zlib compression (via pako).
+
+## Features
+
+- Clean, responsive UI built with Material-UI components
+- Text input field supporting multiline content
+- Real-time text compression using zlib algorithm
+- Base64 encoded output display
+- Error handling for compression failures
+
+## Technologies Used
+
+- Next.js 14 with TypeScript
+- Material-UI (MUI) for components
+- Pako for zlib compression
+- Tailwind CSS for styling
 
 ## Getting Started
 
-First, run the development server:
+1. Navigate to the app directory:
+   ```bash
+   cd app
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to use the application.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to Use
 
-## Learn More
+1. Enter any text in the input field
+2. Click the "Compress Text" button to see the compressed output in base64 format
+3. Click "Decompress Text" to verify the compression by seeing the original text restored
 
-To learn more about Next.js, take a look at the following resources:
+## Implementation Details
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application uses the pako library, which is a pure JavaScript port of zlib, to compress the input text. The implementation uses:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `deflateRaw` method to remove zlib headers for smaller output
+- Maximum compression level (9) for best compression ratio
+- Base64 encoding for the final output
 
-## Deploy on Vercel
+These optimizations ensure the smallest possible compressed output while maintaining browser compatibility and not requiring server-side processing.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Compression Details
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The compression/decompression process:
+1. Compression:
+   - Converts input text to a Uint8Array using TextEncoder
+   - Applies raw deflate compression with level 9 (maximum compression)
+   - Converts the compressed bytes to base64 for display
+
+2. Decompression:
+   - Converts base64 back to a byte array
+   - Uses pako's inflateRaw to decompress the data
+   - Decodes the resulting bytes back to text using TextDecoder
+
+The use of `deflateRaw` instead of regular `deflate` removes the zlib header and checksum, resulting in slightly smaller output, while the maximum compression level ensures the best possible compression ratio at the cost of slightly more processing time.
