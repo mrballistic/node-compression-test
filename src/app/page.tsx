@@ -67,7 +67,7 @@ export default function Home() {
 						</Typography>
 						<Paper 
 							elevation={1} 
-							className="p-4 bg-gray-50 break-all"
+							className="p-4 break-all"
 						>
 							<Typography variant="body2">
 								{compressed}
@@ -110,7 +110,7 @@ export default function Home() {
 								</Typography>
 								<Paper 
 									elevation={1} 
-									className="p-4 bg-gray-50"
+									className="p-4"
 								>
 									<Typography variant="body2">
 										{decompressed}
