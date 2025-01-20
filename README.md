@@ -16,6 +16,7 @@ A Next.js application that provides a simple interface for compressing text usin
 - Material-UI (MUI) for components
 - Pako for zlib compression
 - Tailwind CSS for styling
+- Jest and React Testing Library for testing
 
 ## Getting Started
 
@@ -51,6 +52,23 @@ The application uses the pako library, which is a pure JavaScript port of zlib, 
 - Base64 encoding for the final output
 
 These optimizations ensure the smallest possible compressed output while maintaining browser compatibility and not requiring server-side processing.
+
+## Testing
+
+The application includes a comprehensive test suite using Jest and React Testing Library. Tests cover:
+
+- Component rendering
+- Form interactions
+- Compression functionality
+- Decompression functionality
+- Error handling
+- Edge cases (empty input, long text)
+
+To run the tests:
+```bash
+npm test           # Run tests once
+npm test:watch    # Run tests in watch mode
+```
 
 ## Compression Details
 
