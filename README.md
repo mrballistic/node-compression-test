@@ -12,7 +12,7 @@ A Next.js application that provides a simple interface for compressing text usin
 
 ## Technologies Used
 
-- Next.js 14 with TypeScript
+- Next.js 15.1 with TypeScript
 - Material-UI (MUI) for components
 - Pako for zlib compression
 - Tailwind CSS for styling
