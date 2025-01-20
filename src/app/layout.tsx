@@ -1,8 +1,6 @@
-'use client';
-
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider, useMediaQuery } from '@mui/material';
-import { theme, darkTheme } from '../theme';
+import { metadata } from './metadata';
+import { Providers } from './providers';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,25 +13,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Metadata moved to a separate file since 'use client' components can't export metadata
-function RootLayout({
+export { metadata };
+
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider theme={prefersDarkMode ? darkTheme : theme}>
-          {children}
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
-
-export default RootLayout;
